@@ -13,7 +13,7 @@ namespace Scuola
     public static class GestioneMySql
     {
         public static string StringaConnessione =
-            "Data Source=localhost;Database=alunni;userid=root;password=\"\";";
+            "Data Source=localhost;Database=registro_elettronico;userid=root;password=\"\";";
         public static MySqlConnection Connessione = new MySqlConnection(StringaConnessione);
 
         public static bool ApriConnessione()

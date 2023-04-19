@@ -81,16 +81,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggiungiAssenze.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggiungiAssenze.Designer.cs">
+      <DependentUpon>AggiungiAssenze.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggiungiClassi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggiungiClassi.Designer.cs">
+      <DependentUpon>AggiungiClassi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggiungiDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggiungiDocente.Designer.cs">
+      <DependentUpon>AggiungiDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggiungiLezione.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggiungiLezione.Designer.cs">
+      <DependentUpon>AggiungiLezione.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggiungiMateria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggiungiMateria.Designer.cs">
+      <DependentUpon>AggiungiMateria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggiungiVoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggiungiVoto.Designer.cs">
+      <DependentUpon>AggiungiVoto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Assenza.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Docente.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="formAggiungiStudente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="formAggiungiStudente.Designer.cs">
+      <DependentUpon>formAggiungiStudente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Lezione.cs" />
+    <Compile Include="Logincs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logincs.Designer.cs">
+      <DependentUpon>Logincs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Materia.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Program.cs" />
@@ -98,8 +146,29 @@
     <Compile Include="School.cs" />
     <Compile Include="Studente.cs" />
     <Compile Include="Voto.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="AggiungiAssenze.resx">
+      <DependentUpon>AggiungiAssenze.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AggiungiClassi.resx">
+      <DependentUpon>AggiungiClassi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AggiungiDocente.resx">
+      <DependentUpon>AggiungiDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AggiungiMateria.resx">
+      <DependentUpon>AggiungiMateria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AggiungiVoto.resx">
+      <DependentUpon>AggiungiVoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAggiungiStudente.resx">
+      <DependentUpon>formAggiungiStudente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logincs.resx">
+      <DependentUpon>Logincs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
