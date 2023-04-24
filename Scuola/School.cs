@@ -1,12 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Scuola
 {
@@ -31,220 +33,142 @@ namespace Scuola
         {
             Console.WriteLine("Oggetto creato");
         }
-        
-        public void addStudente( string nome, string cognome, string email)
+
+        public List<Studente> leggiStudenti()
         {
-            try
-            {
-                // Apertura connessione
-                if (!GestioneMySql.ApriConnessione())
-                    throw new Exception("Errore nell'apertura della connessione.");
-
-                // Query da eseguire
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(" INSERT INTO studente (nome, cognome, email) values(@nome, @cognome, @email)"  );
-
-                using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
-                {
-                    cmd.Parameters.Add(new MySqlParameter("@nome", nome));
-                    cmd.Parameters.Add(new MySqlParameter("@cognome", cognome));
-                    cmd.Parameters.Add(new MySqlParameter("@email", email));
-                    
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Records Inserted Successfully");
-                        }
-                        catch (SqlException e)
-                        {
-                            MessageBox.Show("Error Generated. Details: " + e.ToString());
-                        }
-                    
-                }
-
-                // Chiusura connessione
-                /*if (!GestioneMySql.ChiudiConnessione())
-                    throw new Exception("Errore nella chiusura della connessione.");*/
-            }
-            catch (Exception ex)
-            {
-                /*GestioneMySql.ChiudiConnessione();*/
-                MessageBox.Show("Errore: " + ex.Message);
-            }
+            List<Studente> students = new List<Studente>();
+            Studente studente = new Studente();
+            students = studente.leggi();
+            return students;
         }
 
-        public void removeStudent(int id)
+        public List<Classe> leggiClassi()
         {
-            try
-            {
-                // Apertura connessione
-                if (!GestioneMySql.ApriConnessione())
-                    throw new Exception("Errore nell'apertura della connessione.");
-
-                // Query da eseguire
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(" DELETE FROM studente WHERE studente.id=@id;"  );
-
-                using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
-                {
-                    cmd.Parameters.Add(new MySqlParameter("@id", id));
-                    
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Records deleted Successfully");
-                        }
-                        catch (SqlException e)
-                        {
-                            MessageBox.Show("Error Generated. Details: " + e.ToString());
-                        }
-                    
-                }
-
-                // Chiusura connessione
-                /*if (!GestioneMySql.ChiudiConnessione())
-                    throw new Exception("Errore nella chiusura della connessione.");*/
-            }
-            catch (Exception ex)
-            {
-                /*GestioneMySql.ChiudiConnessione();*/
-                MessageBox.Show("Errore: " + ex.Message);
-            }
+            List<Classe> classi = new List<Classe>();
+            Classe classe = new Classe();
+            classi = classe.leggi();
+            return classi;
         }
 
-        public void readStudent()
+        public List<Materia> leggiMaterie()
         {
-            //restituisce la lista di studenti e la visualizza in una tabella
+            List<Materia> materie = new List<Materia>();
+            Materia materia = new Materia();
+            materie = materia.leggi();
+            return materie;
+        }
+
+        public List<Docente> leggiDocenti()
+        {
+            List<Docente> docenti = new List<Docente>();
+            Docente docente = new Docente();
+            docenti = docente.leggi();
+            return docenti;
+        }
+
+
+        public List<Voto> leggiVoti()
+        {
+            List<Voto> voti = new List<Voto>();
+            Voto voto = new Voto();
+            voti = voto.leggi();
+            return voti;
+        }
+
+        public List<Assenza> leggiAssenze()
+        {
+            List<Assenza> assenze = new List<Assenza>();
+            Assenza assenza = new Assenza();
+            assenze = assenza.leggi();
+            return assenze;
+        }
+
+        public List<Lezione> leggiLezioni()
+        {
+            List<Lezione> lezioni = new List<Lezione>();
+            Lezione lezione = new Lezione();
+            lezioni = lezione.leggi();
+            return lezioni;
+        }
+
+        public void aggiungiStudente(string nome, string cognome, string email, int id_classe)
+        {
+            Studente studente = new Studente();
+            studente.aggiungi(nome, cognome,email,id_classe);
         }
 
         public void aggiungiDocente(string nome, string cognome, string email)
         {
-
-        }
-
-        public void rimuoviDocente(int id)
-        {
-
-        }
-
-        public void leggiDocenti()
-        {
-            //restituisce la lista di docente e la visualizza in una tabella
+            Docente docente = new Docente();
+            docente.aggiungi(nome, cognome, email);
         }
 
         public void aggiungiVoto(int id_materia, int id_docente, int id_studente, int voto)
         {
-            //aggiunge un voto alla tabella voti
+            Voto votoo = new Voto();
+            votoo.aggiungi(id_materia, id_docente, id_studente, voto);
         }
 
-        public void visualizzaVotiStudente(int id_studente) //eventuale aggiunta di altri due metodi per filtrare per materia e docente
+        public void aggiungiMateria (string descrizione, int id_docente)
         {
-
+            Materia materia = new Materia();
+            materia.aggiungi(descrizione, id_docente);
         }
 
-        public void rimuoviVoto(int id_voto)
-        {
-
-        }
-
-        public void aggiungiMateria(string descrizione, int id_docente)
-        {
-            //inserisce la materia nella tabella e assegna un docente
-        }
-
-        public void rimuoviMateria(int id_materia)
-        {
-
-        }
-
-        public void getMaterie()
-        {
-            //visualizza lista delle materie
-        }
-        
         public void aggiungiClasse(int anno, char sezione)
         {
-
+            Classe classe = new Classe();
+            classe.aggiungi(anno, sezione);
         }
 
-        public void assegnaClasseStudente(int id_studente, int id_classe)
+        public void aggiungiLezione(int id_docente, DateTime data_inizio, DateTime data_fine, int id_materia, string descrizione)
         {
-            //metodo da richiamare dentro il metodo add studente 
+            Lezione lezione = new Lezione();
+            lezione.aggiungi( id_docente, data_inizio, data_fine, id_materia, descrizione);
         }
 
-        public void eliminaClasse(int id_classe)
+        public void aggiungiAssenza(int id_studente, DateTime data_inizio, DateTime data_fine, string motivazione)
         {
-
+            Assenza assenza = new Assenza();
+            assenza.aggiungi(id_studente, data_inizio, data_fine, motivazione);
         }
 
-        public void getClassi()
+        public void rimuoviStudente(int id)
         {
-            //ottiene l'elenco delle classi
+            Studente studente = new Studente();
+            studente.rimuovi(id);
         }
 
-        public void aggiungiAssenza(int id_studente, DateTime data_inizio, DatetTime data_fine, string motivazione)
+        public void rimuoviDocente(int id)
         {
-
+            Docente docente = new Docente();
+            docente.rimuovi(id);
         }
+
+        public void rimuoviVoto(int id)
+        {
+            Voto votoo = new Voto();
+            votoo.rimuovi(id);
+        }
+
+        public void rimuoviMateria(int id)
+        {
+            Materia materia = new Materia();
+            materia.rimuovi(id);
+        }
+
+        public void rimuoviClasse(int id)
+        {
+            Classe classe = new Classe();
+            classe.rimuovi(id);
+        }
+
 
         public void giustificaAssenza(int id_assenza)
         {
 
         }
 
-        public void getAssenzeStudent(int id_studente)
-        {
-            //restituisce le assenze di uno studente
-        }
-
-        public void aggiungiLezione(int id_docente, DateTime data_inizio, DatetTime data_fine, int id_materia, string descrizione )
-        {
-            
-        }
-
-        public void visualizzaLezioni()
-        {
-            //elenco lezioni non filtrate
-        }
-
-        public void provaGet()
-        {
-            try
-            {
-                // Apertura connessione
-                if (!GestioneMySql.ApriConnessione())
-                    throw new Exception("Errore nell'apertura della connessione.");
-
-                // Query da eseguire
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(" SELECT nome, cognome, data_nascita, cellulare FROM alunni.studenti ");
-                //sb.AppendLine(" FROM test.persone ");
-
-                using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
-                {
-                    using (MySqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            string nome = dr.GetString("nome");
-                            string cognome = dr.GetString("cognome");
-                            DateTime dataNascita = dr.GetDateTime("data_nascita");
-                            string cellulare = dr.GetString("cellulare");
-                            MessageBox.Show($"{nome}, {cognome}, {dataNascita.ToString()}, {cellulare}");
-                        }
-                    }
-                }
-
-                // Chiusura connessione
-                if (!GestioneMySql.ChiudiConnessione())
-                    throw new Exception("Errore nella chiusura della connessione.");
-            }
-            catch (Exception ex)
-            {
-                GestioneMySql.ChiudiConnessione();
-                Console.WriteLine("Errore: " + ex.Message);
-            }
-        }
-
+       
     }
 }

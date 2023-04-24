@@ -29,10 +29,28 @@ namespace Scuola
 
         private void btnAggiungi_Click(object sender, EventArgs e)
         {
-            School.Instance.addStudente(txtNome.Text, txtCognome.Text,txtEmail.Text);
+            int id_classe=Convert.ToInt32(comboBoxClasse.GetItemText(comboBoxClasse.SelectedValue));
+            School.Instance.aggiungiStudente(txtNome.Text, txtCognome.Text,txtEmail.Text,id_classe);
         }
 
         private void formAggiungiStudente_Load(object sender, EventArgs e)
+        {
+            /* ;
+            classi = School.Instance.leggiClassi();
+            comboBoxClasse.DataSource = classi;
+
+            for (int i = 0; i < classi.Count; i++)
+            {
+                comboBoxClasse.Items.Add(classi[i].Anno);
+            }*/
+            List<Classe> classi = new List<Classe>();
+            classi = School.Instance.leggiClassi();
+            comboBoxClasse.DisplayMember = "annosezione";
+            comboBoxClasse.ValueMember = "id";
+            comboBoxClasse.DataSource=classi.Select(p => new { annosezione = $"{p.Anno} {p.Sezione}", p.Id }).ToList();
+        }
+
+        private void studenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

@@ -118,6 +118,7 @@
       <DependentUpon>AggiungiVoto.cs</DependentUpon>
     </Compile>
     <Compile Include="Assenza.cs" />
+    <Compile Include="Class.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Docente.cs" />
     <Compile Include="formAggiungiStudente.cs">
@@ -140,11 +141,40 @@
       <DependentUpon>Logincs.cs</DependentUpon>
     </Compile>
     <Compile Include="Materia.cs" />
-    <Compile Include="Persona.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="School.cs" />
     <Compile Include="Studente.cs" />
+    <Compile Include="VisualizzaAssenze.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualizzaAssenze.Designer.cs">
+      <DependentUpon>VisualizzaAssenze.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisualizzaClassi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualizzaClassi.Designer.cs">
+      <DependentUpon>VisualizzaClassi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisualizzaLezioni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualizzaLezioni.Designer.cs">
+      <DependentUpon>VisualizzaLezioni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisualizzaMaterie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualizzaMaterie.Designer.cs">
+      <DependentUpon>VisualizzaMaterie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisualizzaVoti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualizzaVoti.Designer.cs">
+      <DependentUpon>VisualizzaVoti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Voto.cs" />
     <EmbeddedResource Include="AggiungiAssenze.resx">
       <DependentUpon>AggiungiAssenze.cs</DependentUpon>
@@ -154,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AggiungiDocente.resx">
       <DependentUpon>AggiungiDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AggiungiLezione.resx">
+      <DependentUpon>AggiungiLezione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AggiungiMateria.resx">
       <DependentUpon>AggiungiMateria.cs</DependentUpon>
@@ -179,6 +212,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="VisualizzaAssenze.resx">
+      <DependentUpon>VisualizzaAssenze.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualizzaClassi.resx">
+      <DependentUpon>VisualizzaClassi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualizzaLezioni.resx">
+      <DependentUpon>VisualizzaLezioni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualizzaMaterie.resx">
+      <DependentUpon>VisualizzaMaterie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualizzaVoti.resx">
+      <DependentUpon>VisualizzaVoti.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

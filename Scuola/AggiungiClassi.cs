@@ -16,5 +16,21 @@ namespace Scuola
         {
             InitializeComponent();
         }
+
+        private void AggiungiClassi_Load(object sender, EventArgs e)
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                comboBoxAnno.Items.Add(i);
+            }
+
+            String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I" };
+            comboBoxSezione.DataSource = letters;
+        }
+
+        private void btnAggiungi_Click(object sender, EventArgs e)
+        {
+            School.Instance.aggiungiClasse((int)comboBoxAnno.SelectedItem, Convert.ToChar(comboBoxSezione.SelectedItem));
+        }
     }
 }

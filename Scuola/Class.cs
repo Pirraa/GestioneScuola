@@ -10,63 +10,52 @@ using System.Windows.Forms;
 
 namespace Scuola
 {
-    public class Docente
+    public class Classe
     {
-        List<Materia> materie = new List<Materia>();
-        List<Lezione> lezioni = new List<Lezione>();
+        public int Anno { get; set; }
+        public int Id { get; set; }
+        public char Sezione { get; set; }
 
-        int id;
-        string nome;
-        string cognome;
-        string email;
-
-        public Docente(int id, string nome, string cognome, string email)
+        public Classe(int id, int anno, char sezione)
         {
             this.Id = id;
-            this.Nome = nome;
-            this.Cognome = cognome;
-            this.Email = email;
+            this.Anno = anno;
+            this.Sezione = sezione;
         }
 
-        public Docente()
+        public Classe()
         {
 
         }
 
-        public string Nome { get => nome; set => nome = value; }
-        public string Cognome { get => cognome; set => cognome = value; }
-        public string Email { get => email; set => email = value; }
-        public int Id { get => id; set => id = value; }
-
-        public List<Docente> leggi()
+        public List<Classe> leggi()
         {
-            List<Docente> docenti = new List<Docente>();
-            //restituisce la lista di Docenti e la visualizza in una tabella
+            //ottiene l'elenco delle classi
+            List<Classe> classi = new List<Classe>();
+            //visualizza lista delle materie
             try
             {
-                // Apertura connessione
                 if (!GestioneMySql.ApriConnessione())
                     throw new Exception("Errore nell'apertura della connessione.");
 
-                // Query da eseguire
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(" SELECT d.id_docente, d.nome, d.cognome, d.email FROM docente d");
-                //sb.AppendLine(" FROM test.persone ");
+                sb.AppendLine(" SELECT id, anno, sezione FROM classe");
 
                 MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione);
 
+                //return materie;
                 using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        Console.WriteLine(dr.GetString("nome"));
-                        docenti.Add(new Docente(dr.GetInt32("id_docente"), dr.GetString("nome"), dr.GetString("cognome"), dr.GetString("email")));
+                        classi.Add(new Classe(dr.GetInt32("id"), dr.GetInt32("anno"), dr.GetChar("sezione")));
                     }
                 }
-                return docenti;
+                return classi;
 
                 if (!GestioneMySql.ChiudiConnessione())
                     throw new Exception("Errore nella chiusura della connessione.");
+
             }
             catch (Exception ex)
             {
@@ -76,7 +65,7 @@ namespace Scuola
             return null;
         }
 
-        public void aggiungi(string nome, string cognome, string email)
+        public void aggiungi(int anno, char sezione)
         {
             try
             {
@@ -84,13 +73,12 @@ namespace Scuola
                     throw new Exception("Errore nell'apertura della connessione.");
 
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("INSERT INTO docente (nome, cognome, email) values(@nome, @cognome, @email)");
+                sb.AppendLine("INSERT INTO classe (anno, sezione) VALUES (@anno, @sezione)");
 
                 using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
                 {
-                    cmd.Parameters.Add(new MySqlParameter("@nome", nome));
-                    cmd.Parameters.Add(new MySqlParameter("@cognome", cognome));
-                    cmd.Parameters.Add(new MySqlParameter("@email", email));
+                    cmd.Parameters.Add(new MySqlParameter("@anno", anno));
+                    cmd.Parameters.Add(new MySqlParameter("@sezione", sezione));
 
                     try
                     {
@@ -113,7 +101,7 @@ namespace Scuola
             }
         }
 
-        public void rimuovi(int id)
+        public void rimuovi(int id_classe)
         {
             try
             {
@@ -121,11 +109,11 @@ namespace Scuola
                     throw new Exception("Errore nell'apertura della connessione.");
                 StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine(" DELETE FROM docente WHERE docente.id=@id;");
+                sb.AppendLine(" DELETE FROM classe WHERE classe.id=@id;");
 
                 using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
                 {
-                    cmd.Parameters.Add(new MySqlParameter("@id", id));
+                    cmd.Parameters.Add(new MySqlParameter("@id", id_classe));
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -143,6 +131,5 @@ namespace Scuola
                 MessageBox.Show("Errore: " + ex.Message);
             }
         }
-
     }
 }

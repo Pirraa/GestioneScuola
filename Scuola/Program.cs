@@ -16,7 +16,7 @@ namespace Scuola
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new formAggiungiStudente());
+            Application.Run(new Home());
         }
     }
 }

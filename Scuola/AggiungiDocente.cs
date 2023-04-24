@@ -16,5 +16,16 @@ namespace Scuola
         {
             InitializeComponent();
         }
+
+
+        private void AggiungiDocente_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnAggiungi_Click(object sender, EventArgs e)
+        {
+            School.Instance.aggiungiDocente(txtNome.Text, txtCognome.Text, txtEmail.Text);
+        }
     }
 }

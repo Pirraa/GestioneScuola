@@ -17,9 +17,18 @@ namespace Scuola
             InitializeComponent();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void AggiungiMateria_Load(object sender, EventArgs e)
         {
+            List<Docente> docenti = new List<Docente>();
+            docenti = School.Instance.leggiDocenti();
+            comboBoxDocente.DataSource = docenti;
+            comboBoxDocente.DisplayMember = "nome";
+            comboBoxDocente.ValueMember = "id";
+        }
 
+        private void btnAggiungi_Click(object sender, EventArgs e)
+        {
+            School.Instance.aggiungiMateria(txtMateria.Text, (int)comboBoxDocente.SelectedValue);
         }
     }
 }

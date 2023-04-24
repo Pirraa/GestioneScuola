@@ -16,5 +16,21 @@ namespace Scuola
         {
             InitializeComponent();
         }
+
+
+
+        private void AggiungiAssenze_Load(object sender, EventArgs e)
+        {
+            List<Studente> studenti = new List<Studente>();
+            studenti = School.Instance.leggiStudenti();
+            comboBoxStudente.DataSource = studenti;
+            comboBoxStudente.DisplayMember = "nome";
+            comboBoxStudente.ValueMember = "id";
+        }
+
+        private void btnAggiungi_Click(object sender, EventArgs e)
+        {
+            School.Instance.aggiungiAssenza(Convert.ToInt32(comboBoxStudente.SelectedValue), (DateTime)dateTimePicker1.Value, (DateTime)dateTimePicker2.Value, txtMotivo.Text);
+        }
     }
 }
