@@ -15,19 +15,22 @@ namespace Scuola
     {
         int id;
         string descrizione;
+        string docente;
 
         public string Descrizione { get => descrizione; set => descrizione = value; }
         public int Id { get => id; set => id = value; }
+        public string Docente { get => docente; set => docente = value; }
 
         public Materia()
         {
 
         }
 
-        public Materia(int id, string descrizione)
+        public Materia(int id, string descrizione, string docente)
         {
             this.Id = id;
             this.descrizione = descrizione;
+            this.docente = docente;
         }
 
         public List<Materia> leggi()
@@ -40,7 +43,7 @@ namespace Scuola
                     throw new Exception("Errore nell'apertura della connessione.");
 
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(" SELECT materia.id_materia, materia.descrizione FROM materia");
+                sb.AppendLine(" SELECT distinct materia.id_materia, materia.descrizione as materia, \r\nconcat(docente.nome,' ',docente.cognome) as docente FROM materia \r\nleft join docente_materia on docente_materia.id_materia=materia.id_materia\r\nleft join docente on docente.id_docente=docente_materia.id_docente\r\n ");
 
                 MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione);
 
@@ -48,7 +51,7 @@ namespace Scuola
                 {
                     while (dr.Read())
                     {
-                        materie.Add(new Materia(dr.GetInt32("id_materia"), dr.GetString("descrizione")));
+                        materie.Add(new Materia(dr.GetInt32("id_materia"), dr.GetString("materia"), dr.GetString("docente")));
                     }
                 }
                 return materie;
@@ -146,7 +149,7 @@ namespace Scuola
                     throw new Exception("Errore nell'apertura della connessione.");
                 StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine(" DELETE FROM materia WHERE materia.id=@id;");
+                sb.AppendLine(" DELETE FROM materia WHERE materia.id_materia=@id;");
 
                 using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
                 {

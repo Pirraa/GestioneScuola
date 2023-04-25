@@ -30,7 +30,7 @@ namespace Scuola
 
         private void btnAggiungi_Click(object sender, EventArgs e)
         {
-            School.Instance.aggiungiAssenza(Convert.ToInt32(comboBoxStudente.SelectedValue), (DateTime)dateTimePicker1.Value, (DateTime)dateTimePicker2.Value, txtMotivo.Text);
+            School.Instance.aggiungiAssenza(Convert.ToInt32(comboBoxStudente.SelectedValue), (DateTime)dateTimePicker1.Value, (DateTime)dateTimePicker2.Value, txtMotivo.Text, ckbGiustificato.Checked);
         }
     }
 }

@@ -30,16 +30,40 @@ namespace Scuola
         private void InitializeComponent()
         {
             this.dataGridViewMaterie = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.docente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterie)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewMaterie
             // 
             this.dataGridViewMaterie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMaterie.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.materia,
+            this.docente});
             this.dataGridViewMaterie.Location = new System.Drawing.Point(32, 46);
             this.dataGridViewMaterie.Name = "dataGridViewMaterie";
             this.dataGridViewMaterie.Size = new System.Drawing.Size(726, 340);
             this.dataGridViewMaterie.TabIndex = 3;
+            this.dataGridViewMaterie.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewMaterie_KeyDown);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // materia
+            // 
+            this.materia.HeaderText = "Materia";
+            this.materia.Name = "materia";
+            // 
+            // docente
+            // 
+            this.docente.HeaderText = "Docente";
+            this.docente.Name = "docente";
             // 
             // VisualizzaMaterie
             // 
@@ -59,5 +83,8 @@ namespace Scuola
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewMaterie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn materia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn docente;
     }
 }

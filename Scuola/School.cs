@@ -15,12 +15,16 @@ namespace Scuola
     public class School
     {
         static private School instance = null;
+        private static readonly object locked = new object ();  
         static public School Instance
         {
             get
             {
-                if (instance == null) instance = new School();
-                return instance;
+                lock(locked)
+                {
+                    if (instance == null) instance = new School();
+                    return instance;
+                }
             }
         }
 
@@ -127,10 +131,10 @@ namespace Scuola
             lezione.aggiungi( id_docente, data_inizio, data_fine, id_materia, descrizione);
         }
 
-        public void aggiungiAssenza(int id_studente, DateTime data_inizio, DateTime data_fine, string motivazione)
+        public void aggiungiAssenza(int id_studente, DateTime data_inizio, DateTime data_fine, string motivazione, bool giustificato)
         {
             Assenza assenza = new Assenza();
-            assenza.aggiungi(id_studente, data_inizio, data_fine, motivazione);
+            assenza.aggiungi(id_studente, data_inizio, data_fine, motivazione, giustificato);
         }
 
         public void rimuoviStudente(int id)
@@ -145,6 +149,7 @@ namespace Scuola
             docente.rimuovi(id);
         }
 
+        //questi ultimi metodi non sono collegati al frontend, bisogna sostituire il datasource con un ciclo for e aggiungere il metodo keydown della datagridwiev con il tasto canc
         public void rimuoviVoto(int id)
         {
             Voto votoo = new Voto();
@@ -163,12 +168,9 @@ namespace Scuola
             classe.rimuovi(id);
         }
 
-
         public void giustificaAssenza(int id_assenza)
         {
 
         }
-
-       
     }
 }

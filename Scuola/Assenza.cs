@@ -82,7 +82,7 @@ namespace Scuola
             return null;
         }
 
-        public void aggiungi(int id_studente, DateTime data_inizio, DateTime data_fine, string motivazione)
+        public void aggiungi(int id_studente, DateTime data_inizio, DateTime data_fine, string motivazione, bool giustificato)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Scuola
                     throw new Exception("Errore nell'apertura della connessione.");
 
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("INSERT INTO assenza (id_studente, data_inizio, data_fine, motivazione) VALUES (@id_studente, @data_inizio, @data_fine, @motivazione)");
+                sb.AppendLine("INSERT INTO assenza (id_studente, data_inizio, data_fine, motivazione, giustificato) VALUES (@id_studente, @data_inizio, @data_fine, @motivazione, @giustificato)");
 
                 using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
                 {
@@ -98,6 +98,8 @@ namespace Scuola
                     cmd.Parameters.Add(new MySqlParameter("@data_inizio", data_inizio));
                     cmd.Parameters.Add(new MySqlParameter("@data_fine", data_fine));
                     cmd.Parameters.Add(new MySqlParameter("@motivazione", motivazione));
+                    cmd.Parameters.Add(new MySqlParameter("@giustificato", giustificato));
+
 
                     try
                     {

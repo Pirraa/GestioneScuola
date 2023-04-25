@@ -199,7 +199,6 @@
             this.dataGridViewStudenti.Name = "dataGridViewStudenti";
             this.dataGridViewStudenti.Size = new System.Drawing.Size(600, 150);
             this.dataGridViewStudenti.TabIndex = 2;
-            this.dataGridViewStudenti.SelectionChanged += new System.EventHandler(this.dataGridViewStudenti_SelectionChanged);
             this.dataGridViewStudenti.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewStudenti_KeyDown);
             // 
             // dataGridViewDocenti
@@ -209,6 +208,7 @@
             this.dataGridViewDocenti.Name = "dataGridViewDocenti";
             this.dataGridViewDocenti.Size = new System.Drawing.Size(600, 150);
             this.dataGridViewDocenti.TabIndex = 3;
+            this.dataGridViewDocenti.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewDocenti_KeyDown);
             // 
             // lblStudenti
             // 

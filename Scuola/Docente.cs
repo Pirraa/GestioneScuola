@@ -121,7 +121,7 @@ namespace Scuola
                     throw new Exception("Errore nell'apertura della connessione.");
                 StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine(" DELETE FROM docente WHERE docente.id=@id;");
+                sb.AppendLine(" DELETE FROM docente WHERE docente.id_docente=@id;");
 
                 using (MySqlCommand cmd = new MySqlCommand(sb.ToString(), GestioneMySql.Connessione))
                 {

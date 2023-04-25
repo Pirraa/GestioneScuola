@@ -29,5 +29,17 @@ namespace Scuola
             }
             //dataGridViewVoti.DataSource = School.Instance.leggiVoti();
         }
+
+        private void dataGridViewVoti_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DataGridViewRow selectedRow = dataGridViewVoti.SelectedRows[0];
+                dataGridViewVoti.Rows.RemoveAt(dataGridViewVoti.SelectedRows[0].Index);
+                DataGridViewCell selectedCell = selectedRow.Cells[0];
+                int indice = Convert.ToInt32(selectedCell.Value);
+                School.Instance.rimuoviVoto((int)indice);
+            }
+        }
     }
 }

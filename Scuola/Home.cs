@@ -26,6 +26,7 @@ namespace Scuola
             DataGridViewColumn id = new DataGridViewTextBoxColumn();
             id.HeaderText = "Id";
             id.Name = "id";
+            id.Visible = false;
             dataGridViewStudenti.Columns.Add(id);
 
             DataGridViewColumn nome = new DataGridViewTextBoxColumn();
@@ -56,31 +57,65 @@ namespace Scuola
             /*dataGridViewStudenti.DataSource = null;
             dataGridViewStudenti.DataSource = School.Instance.leggiStudenti();*/
 
-            dataGridViewDocenti.DataSource = null;
-            dataGridViewDocenti.DataSource = School.Instance.leggiDocenti();
+
+            List<Docente> docenti = new List<Docente>();
+            docenti = School.Instance.leggiDocenti();
+
+            DataGridViewColumn id_d = new DataGridViewTextBoxColumn();
+            id_d.HeaderText = "Id";
+            id_d.Name = "id";
+            id_d.Visible = false;
+            dataGridViewDocenti.Columns.Add(id_d);
+
+            DataGridViewColumn nome_d = new DataGridViewTextBoxColumn();
+            nome_d.HeaderText = "Nome";
+            nome_d.Name = "nome";
+            dataGridViewDocenti.Columns.Add(nome_d);
+
+            DataGridViewColumn cognome_d = new DataGridViewTextBoxColumn();
+            cognome_d.HeaderText = "Cognome";
+            cognome_d.Name = "cognome";
+            dataGridViewDocenti.Columns.Add(cognome_d);
+
+            DataGridViewColumn email_d = new DataGridViewTextBoxColumn();
+            email_d.HeaderText = "Email";
+            email_d.Name = "email";
+            dataGridViewDocenti.Columns.Add(email_d);
+
+            for (int i = 0; i < docenti.Count; i++)
+            {
+                dataGridViewDocenti.Rows.Add(docenti[i].Id, docenti[i].Nome, docenti[i].Cognome, docenti[i].Email);
+            }
+
+            /*dataGridViewDocenti.DataSource = null;
+            dataGridViewDocenti.DataSource = School.Instance.leggiDocenti();*/
         }
 
         private void studenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            dataGridViewDocenti.DataSource = null;
             List<Studente> studenti = new List<Studente>();
             studenti = School.Instance.leggiStudenti();
             formAggiungiStudente formAggiungiStudente = new formAggiungiStudente();
             formAggiungiStudente.ShowDialog();
+            dataGridViewStudenti.Rows.Clear();
             for (int i = 0; i < studenti.Count; i++)
             {
                 dataGridViewStudenti.Rows.Add(studenti[i].Id, studenti[i].Nome, studenti[i].Cognome, studenti[i].Email, studenti[i].Classe);
             }
-
-            
         }
 
         private void docenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            List<Docente> docenti = new List<Docente>();
+            docenti = School.Instance.leggiDocenti();
             AggiungiDocente AggiungiDocente = new AggiungiDocente();
             AggiungiDocente.ShowDialog();
-
-            dataGridViewDocenti.DataSource = null;
-            dataGridViewDocenti.DataSource = School.Instance.leggiDocenti();
+            dataGridViewDocenti.Rows.Clear();
+            for (int i = 0; i < docenti.Count; i++)
+            {
+                dataGridViewDocenti.Rows.Add(docenti[i].Id, docenti[i].Nome, docenti[i].Cognome, docenti[i].Email);
+            }
         }
 
         private void votiToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -160,9 +195,17 @@ namespace Scuola
             }
         }
 
-        private void dataGridViewStudenti_SelectionChanged(object sender, EventArgs e)
+
+        private void dataGridViewDocenti_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode == Keys.Delete)
+            {
+                DataGridViewRow selectedRow = dataGridViewDocenti.SelectedRows[0];
+                dataGridViewDocenti.Rows.RemoveAt(dataGridViewDocenti.SelectedRows[0].Index);
+                DataGridViewCell selectedCell = selectedRow.Cells[0];
+                int indice = Convert.ToInt32(selectedCell.Value);
+                School.Instance.rimuoviDocente((int)indice);
+            }
         }
     }
 }

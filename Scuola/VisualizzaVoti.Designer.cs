@@ -51,11 +51,13 @@ namespace Scuola
             this.dataGridViewVoti.Name = "dataGridViewVoti";
             this.dataGridViewVoti.Size = new System.Drawing.Size(724, 365);
             this.dataGridViewVoti.TabIndex = 3;
+            this.dataGridViewVoti.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewVoti_KeyDown_1);
             // 
             // id
             // 
             this.id.HeaderText = "Id";
             this.id.Name = "id";
+            this.id.Visible = false;
             // 
             // studente
             // 

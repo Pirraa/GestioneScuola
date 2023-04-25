@@ -19,8 +19,16 @@ namespace Scuola
 
         private void VisualizzaLezioni_Load(object sender, EventArgs e)
         {
-            dataGridViewLezioni.DataSource = null;
-            dataGridViewLezioni.DataSource = School.Instance.leggiLezioni();
+            /*dataGridViewLezioni.DataSource = null;
+            dataGridViewLezioni.DataSource = School.Instance.leggiLezioni();*/
+
+            List<Lezione> lezioni = new List<Lezione>();
+            lezioni = School.Instance.leggiLezioni();
+
+            for (int i = 0; i < lezioni.Count; i++)
+            {
+                dataGridViewLezioni.Rows.Add(lezioni[i].Id, lezioni[i].Ora_inizio, lezioni[i].Ora_fine, lezioni[i].Docente, lezioni[i].Materia,lezioni[i].Descrizione);
+            }
         }
     }
 }
